@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lms/constants/const_texts.dart';
 import 'package:lms/constants/textproperties.dart';
+import 'package:lms/views/faculty_role_screen.dart';
 import '../controllers/login_controller.dart';
 import '../widgets/custom_textfield.dart';
 import 'signup_screen.dart';
@@ -165,7 +166,7 @@ class LoginScreen extends StatelessWidget {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Get.to(() => const SignUpScreen());
+                      Get.to(() => const FacultySignUpScreen());
                     },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
