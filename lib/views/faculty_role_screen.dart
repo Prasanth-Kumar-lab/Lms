@@ -231,50 +231,71 @@ class FacultySignUpScreen extends StatelessWidget {
       ),
 
       /// SIGN UP BUTTON
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Obx(() {
-            return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
-                backgroundColor: Colors.blue.shade700,
-              ),
-              onPressed: controller.isLoading.value
-                  ? null
-                  : () {
-                final faculty = FacultyModel(
-                  role: roleCtrl.text,
-                  firstName: firstNameCtrl.text,
-                  lastName: lastNameCtrl.text,
-                  email: emailCtrl.text,
-                  phone: phoneCtrl.text,
-                  password: passwordCtrl.text,
-                  schoolId: schoolIdCtrl.text,
-                  dateOfBirth: dobCtrl.text,
-                  gender: genderCtrl.text,
-                  employeeId: employeeIdCtrl.text,
-                  admissionNumber: admissionNumCtrl.text,
-                  designation: designationCtrl.text,
-                  departmentId: departmentIdCtrl.text,
-                  joiningDate: joiningDateCtrl.text,
-                  qualification: qualificationCtrl.text,
-                  experienceYears: experienceYearsCtrl.text,
-                );
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Obx(() {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      backgroundColor: Colors.blue.shade700,
+                    ),
+                    onPressed: controller.isLoading.value
+                        ? null
+                        : () {
+                      final faculty = FacultyModel(
+                        role: roleCtrl.text,
+                        firstName: firstNameCtrl.text,
+                        lastName: lastNameCtrl.text,
+                        email: emailCtrl.text,
+                        phone: phoneCtrl.text,
+                        password: passwordCtrl.text,
+                        schoolId: schoolIdCtrl.text,
+                        dateOfBirth: dobCtrl.text,
+                        gender: genderCtrl.text,
+                        employeeId: employeeIdCtrl.text,
+                        admissionNumber: admissionNumCtrl.text,
+                        designation: designationCtrl.text,
+                        departmentId: departmentIdCtrl.text,
+                        joiningDate: joiningDateCtrl.text,
+                        qualification: qualificationCtrl.text,
+                        experienceYears: experienceYearsCtrl.text,
+                      );
 
-                controller.signUpFaculty(faculty);
-              },
-              child: controller.isLoading.value
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text(
-                "Sign Up",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-            );
-          }),
-        ),
-      ),
+                      controller.signUpFaculty(faculty);
+                    },
+                    child: controller.isLoading.value
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  );
+                }),
+
+                const SizedBox(height: 10),
+
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed('/login');
+                  },
+                  child: const Text(
+                    "Already have an account? Login",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
     );
   }
 }

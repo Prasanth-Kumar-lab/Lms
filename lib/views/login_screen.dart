@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lms/constants/const_texts.dart';
 import 'package:lms/constants/textproperties.dart';
-import 'package:lms/views/faculty_role_screen.dart';
 import '../controllers/login_controller.dart';
 import '../widgets/custom_textfield.dart';
 import 'signup_screen.dart';
@@ -16,6 +15,7 @@ class LoginScreen extends StatelessWidget {
     final LoginController controller = Get.put(LoginController());
     final emailCtrl = TextEditingController();
     final passCtrl = TextEditingController();
+    final selectedRole = ''.obs;
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
       body: SafeArea(
@@ -84,9 +84,52 @@ class LoginScreen extends StatelessWidget {
                         icon: Icons.email_outlined,
                         keyboardType: TextInputType.emailAddress,
                       ),
+
                       const SizedBox(height: 20),
 
-                      // Password Field with Eye Toggle
+// Role Dropdown
+                      Obx(() => DropdownButtonFormField<String>(
+                        value: selectedRole.value.isEmpty ? null : selectedRole.value,
+                        decoration: InputDecoration(
+                          labelText: "Select Role",
+                          prefixIcon: const Icon(Icons.person_outline),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.55),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Colors.blue.shade700,
+                              width: 1.5,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Colors.blue.shade700,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'Student',
+                            child: Text('Student'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Faculty',
+                            child: Text('Faculty'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          selectedRole.value = value ?? '';
+                        },
+                      )),
+
+                      const SizedBox(height: 20),
+                      //Here the dropdown for role selection
                       Obx(() => CustomTextField(
                         controller: passCtrl,
                         label: "Password",
@@ -162,11 +205,10 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // Modern Sign Up Button
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Get.to(() => const FacultySignUpScreen());
+                      Get.to(() => const SignUpScreen());
                     },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
